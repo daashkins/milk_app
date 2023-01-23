@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for milk_app",
+  "main": "server.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node ./dist/server.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q ./dist/server.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daashkins/milk_app.git"
+  },
+  "keywords": [
+    "server",
+    "express",
+    "typescript"
+  ],
+  "author": "D.Mylnikova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daashkins/milk_app/issues"
+  },
+  "homepage": "https://github.com/daashkins/milk_app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  }
+}
