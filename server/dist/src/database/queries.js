@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProducts = void 0;
+exports.getProduct = exports.getProducts = void 0;
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: 'postgres',
@@ -19,9 +19,8 @@ const pool = new Pool({
     port: 5432,
 });
 const getProducts = () => __awaiter(void 0, void 0, void 0, function* () {
-    let response;
     try {
-        response = yield pool.query('SELECT * FROM products');
+        const response = yield pool.query('SELECT * FROM products');
         return response.rows;
     }
     catch (error) {
@@ -29,3 +28,13 @@ const getProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getProducts = getProducts;
+const getProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield pool.query(`SELECT * FROM products WHERE id = $1`, [id]);
+        return response.rows;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.getProduct = getProduct;

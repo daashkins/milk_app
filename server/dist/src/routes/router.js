@@ -32,3 +32,13 @@ exports.router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send(error.message);
     }
 }));
+exports.router.get('/:id', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = _req.params.id;
+    try {
+        const product = yield (0, queries_1.getProduct)(id);
+        res.status(200).send(product);
+    }
+    catch (error) {
+        res.status(500).send(error.message);
+    }
+}));

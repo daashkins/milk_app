@@ -8,14 +8,29 @@ const pool = new Pool({
 })
 
 const getProducts = async () => {
-  let response;
   try{
-    response = await pool.query('SELECT * FROM products');
+    const response = await pool.query('SELECT * FROM products');
     return response.rows;
   }catch(error: any) {
     console.log(error)
   }
   }
 
+  const getProduct = async (id: string) => {
+    try{
+     const response = await pool.query(`SELECT * FROM products WHERE id = $1`, [id]);
+      return response.rows;
+    }catch(error: any) {
+      console.log(error)
+    }
+  }
 
-export  { getProducts }
+  // const updateProductQuantity = async (id: string) => {
+  //   try{
+  //    const response = await pool.query(`SELECT * FROM products WHERE id = $1`, [id]);
+  //     return response.rows;
+  //   }catch(error: any) {
+  //     console.log(error)
+  //   }
+  // }
+export  { getProducts, getProduct }
