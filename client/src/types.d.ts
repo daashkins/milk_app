@@ -5,3 +5,9 @@ export interface IProduct {
     storage: number
     price: number
 }
+export type IParamsId = {
+    id: string
+}
+export type ProductsContextType = {
+    products: IProduct[]
+}

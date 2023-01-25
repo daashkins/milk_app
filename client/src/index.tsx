@@ -5,12 +5,15 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './components/Header'
+import ProductsProvider from './context/productsContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <BrowserRouter>
-        <Header />
-        <App />
+        <ProductsProvider>
+            <Header />
+            <App />
+        </ProductsProvider>
     </BrowserRouter>
 )
 

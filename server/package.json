@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "backend for milk_app",
   "main": "server.js",
+  "proxy": "https://localhost:3000/",
   "scripts": {
     "build": "npx tsc",
     "start": "node ./dist/server.js",

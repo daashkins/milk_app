@@ -1,20 +1,27 @@
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
 import CardDetailed from './CardDetailed'
-
-type ProductParams = {
-    id: string
-}
+import { BsChevronLeft } from 'react-icons/bs'
 
 const Product = () => {
-    const { id } = useParams<ProductParams>()
-
     return (
         <div className="container mx-auto">
-            <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                Back
+            <button className="bg-transparent text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mt-24">
+                <a
+                    href="/"
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                    }}
+                >
+                    <BsChevronLeft />
+                    <span> Back</span>
+                </a>
             </button>
-            <div className="flex justify-center items-center" style={{height:'70vh'}}>
+            <div
+                className="flex justify-center items-center"
+                style={{ height: '70vh' }}
+            >
                 <div className="group relative">
                     <CardDetailed />
                 </div>
