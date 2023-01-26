@@ -1,0 +1,22 @@
+{
+  "name": "milk_app",
+  "version": "1.0.0",
+  "description": "Milk webshop Fullstack App",
+  "main": "index.js",
+  "scripts": {
+    "start": "(cd server && concurrently \"npx tsc --watch\" \"nodemon -q ./dist/server.js\") & (cd client && npm run start)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daashkins/milk_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daashkins/milk_app/issues"
+  },
+  "homepage": "https://github.com/daashkins/milk_app#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
