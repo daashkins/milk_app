@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 
 const CardDetailed = () => {
     const { products } = useContext(ProductsContext) as ProductsContextType
-    const { cart, addToCart } = useContext(ProductsContext) as ProductsContextType
+    const { addToCart } = useContext(ProductsContext) as ProductsContextType
     const { id } = useParams<IParamsId>()
     const product: IProduct | undefined = products.find(
         (product) => product.id === id
@@ -34,7 +34,7 @@ const CardDetailed = () => {
         event.preventDefault()
         product && addToCart(product, quantityToOrder)
     }
-console.log(cart);
+
     return (
         <div className="w-full flex justify-center">
             <div className="flex flex-col md:flex-row rounded-lg bg-transparent shadow-lg">

@@ -28,7 +28,7 @@ export type ProductsContextType = {
     products: IProduct[]
     cart: IProductToOrder[]
     addToCart: (product: IProduct, quantity: number) => void
-    updateCart: (product: IProduct, quantity: number) => ThemeCssVarOverrides
-    removeFromCart: (product: IProductToOrder) => void
+    // updateCart: (product: IProduct, quantity: number) => ThemeCssVarOverrides
+    // removeFromCart: (product: IProductToOrder) => void
     // updateCart: (products: IProduct[]) => void
 }
