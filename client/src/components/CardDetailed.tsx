@@ -1,21 +1,34 @@
 import * as React from 'react'
 import Image from '../images/milk.png'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ProductsContext } from '../context/productsContext'
 import { ProductsContextType, IParamsId, IProduct } from '../types'
 import { useParams } from 'react-router-dom'
+import { BsCart } from 'react-icons/bs'
 
 const CardDetailed = () => {
     const { products } = useContext(ProductsContext) as ProductsContextType
-    const { addToCart } = useContext(ProductsContext) as ProductsContextType
+    const { cart, addToCart } = useContext(
+        ProductsContext
+    ) as ProductsContextType
     const { id } = useParams<IParamsId>()
     const product: IProduct | undefined = products.find(
         (product) => product.id === id
     )
-    const [quantityToOrder, setQuantityToOrder] = useState<number>(50)
+    const [quantityToOrder, setQuantityToOrder] = useState<number>(1)
     const [styleLeftForSliderLabel, setStyleLeftForSliderLabel] = useState<any>(
-        { left: '50%' }
+        { left: '3%' }
     )
+    const [quantityInCart, setQuantityInCart] = useState<number>(0)
+
+    useEffect(() => {
+        const existingQuantityInCart = cart.find(
+            (productInCart) => productInCart.id === product?.id
+        )?.quantity
+        if (existingQuantityInCart !== undefined) {
+            setQuantityInCart(existingQuantityInCart)
+        }
+    }, [cart])
     const handleInputQuantityChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -60,7 +73,7 @@ const CardDetailed = () => {
                         <input
                             name="range"
                             type="range"
-                            defaultValue="50"
+                            defaultValue={quantityToOrder}
                             min="1"
                             max={product?.storage}
                             step="1"
@@ -75,12 +88,29 @@ const CardDetailed = () => {
                             <span>{quantityToOrder}</span>
                         </div>
                     </div>
-                    <button
-                        className="bg-gray-300 w-36 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded inline-flex items-center mt-14 justify-center"
-                        onClick={handleOrder}
-                    >
-                        <span>Order</span>
-                    </button>
+                    <div className="flex justify-between mt-14">
+                        <button
+                            className="bg-gray-300 w-36 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded inline-flex items-center justify-center"
+                            onClick={handleOrder}
+                        >
+                            <span>Order</span>
+                        </button>
+                        <div>
+                            <a href="/cart">
+                            <BsCart
+                                className="text-gray-800"
+                                style={{
+                                    fontSize: '35px',
+                                    marginRight: '50px',
+                                }}
+                            />
+                            <div className="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full bg-white text-gray-700 border">
+                                {quantityInCart}
+                            </div>
+                            </a>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

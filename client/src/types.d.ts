@@ -1,4 +1,4 @@
-import { ThemeCssVarOverrides } from "@mui/material"
+import { ThemeCssVarOverrides } from '@mui/material'
 
 export interface IProduct {
     id: string

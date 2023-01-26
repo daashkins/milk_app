@@ -17,43 +17,44 @@ const ProductsProvider = ({ children }: any) => {
     }, [])
 
     useEffect(() => {
-        const existingCart = window.localStorage.getItem("cart");
-        if(existingCart) {
-            const productsInExistCart = JSON.parse(existingCart);
+        const existingCart = window.localStorage.getItem('cart')
+        if (existingCart) {
+            const productsInExistCart = JSON.parse(existingCart)
             setCart([...productsInExistCart])
         } else {
-            window.localStorage.setItem("cart", "[]")
+            window.localStorage.setItem('cart', '[]')
         }
     }, [])
 
     useEffect(() => {
-        window.localStorage.setItem("cart", JSON.stringify(cart));
+        window.localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
 
     const addToCart = (product: IProduct, quantity: number) => {
-        let currentProducts = [...cart];
-        const index = currentProducts.findIndex(productInCart => productInCart.id === product.id)
-        if(index >= 0){
-            currentProducts[index].quantity= currentProducts[index].quantity+ quantity
+        let currentProducts = [...cart]
+        const index = currentProducts.findIndex(
+            (productInCart) => productInCart.id === product.id
+        )
+        if (index >= 0) {
+            currentProducts[index].quantity =
+                currentProducts[index].quantity + quantity
             setCart([...currentProducts])
         } else {
-        const newItemInCart: IProductToOrder = {
-            id: product.id,
-            name: product.name,
-            type: product.type,
-            quantity: quantity,
-            price: product.price
-        }
-        setCart([...cart, newItemInCart])
+            const newItemInCart: IProductToOrder = {
+                id: product.id,
+                name: product.name,
+                type: product.type,
+                quantity: quantity,
+                price: product.price,
+            }
+            setCart([...cart, newItemInCart])
         }
     }
 
-    console.log(cart);
+    console.log(cart)
 
     return (
-        <ProductsContext.Provider
-            value={{ products, cart, addToCart}}
-        >
+        <ProductsContext.Provider value={{ products, cart, addToCart }}>
             {children}
         </ProductsContext.Provider>
     )
