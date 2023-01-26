@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import { ProductsContext } from '../context/productsContext'
 import { IProduct, ProductsContextType } from '../types'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
+import BackButton from './BackButton'
 
 const Main = () => {
     const productsTypes = [
@@ -32,6 +33,7 @@ const Main = () => {
     let currentProducts: IProduct[] = []
     let indexOfLastProduct: number = currentPage * productsPerPage
     let indexOfFirstProduct: number = indexOfLastProduct - productsPerPage
+    let totalProductsToShow: number = products.length
 
     const getCurrentProducts = () => {
         if (filter !== 'all') {
@@ -42,6 +44,7 @@ const Main = () => {
                 filteredProducts.length > 9
                     ? Math.ceil(filteredProducts.length / 9)
                     : 1
+            totalProductsToShow = filteredProducts.length
             currentProducts = filteredProducts.slice(
                 indexOfFirstProduct,
                 indexOfLastProduct
@@ -55,6 +58,7 @@ const Main = () => {
                 searchedProducts.length > 9
                     ? Math.ceil(searchedProducts.length / 9)
                     : 1
+            totalProductsToShow = searchedProducts.length
             currentProducts = searchedProducts.slice(
                 indexOfFirstProduct,
                 indexOfLastProduct
@@ -86,37 +90,40 @@ const Main = () => {
     }
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault()
         setSearchValue(event.target.value)
     }
 
-    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSearchSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
         setSearch(searchValue)
         setSearchValue('')
     }
     const handleFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        event.preventDefault()
         setFilter(event.target.value)
     }
 
-    console.log(products.filter((product) => product.type === filter))
     return (
         <div className="container mx-auto" key={`${Math.random() * 10}`}>
             <div
                 className="flex justify-between mt-24"
                 key={`${Math.random() * 10}`}
             >
-                <form className="w-96" onSubmit={handleSearchSubmit}>
-                    <div className="relative" key={`${Math.random() * 10}`}>
-                        <BiSearch className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" />
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            value={searchValue}
-                            className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-transparent-600"
-                            onChange={handleSearchChange}
-                        />
-                    </div>
+                <form
+                    className="w-96 relative"
+                    key="form"
+                    onSubmit={handleSearchSubmit}
+                >
+                    <BiSearch className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" />
+                    <input
+                        key="search"
+                        type="text"
+                        autoFocus
+                        placeholder="Search"
+                        value={searchValue}
+                        className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 "
+                        onChange={handleSearchChange}
+                    />
                 </form>
 
                 <select
@@ -137,9 +144,10 @@ const Main = () => {
 
             <div className="mt-10 mb-10" key={`${Math.random() * 10}`}>
                 <h6 className="font-medium leading-tight text-base mt-0 mb-2 text-stone-900">
-                    99 products
+                    {totalProductsToShow} products
                 </h6>
             </div>
+            {totalProductsToShow === 0 && <BackButton />}
             <div
                 className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
                 key={`${Math.random() * 10}`}

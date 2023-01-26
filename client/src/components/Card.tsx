@@ -13,7 +13,7 @@ const Card: React.FC<Props> = ({ product }) => {
                 <img
                     className="p-8 rounded-t-lg"
                     src={`${Image}`}
-                    alt='milk'
+                    alt="milk"
                     style={{ backgroundColor: 'rgb(243 244 246)' }}
                 />
             </a>
@@ -25,7 +25,7 @@ const Card: React.FC<Props> = ({ product }) => {
                     <span className="font-normal text-slate-500">
                         {product.type}
                     </span>
-                    <span className="font-normal text-amber-200">
+                    <span className="text-yellow-600 text-bold0">
                         {product.storage} liter
                     </span>
                 </div>

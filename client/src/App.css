@@ -2,36 +2,37 @@ body {
     background-color: #fae2e2;
 }
 
-output {
+.range-wrap {
+    position: relative;
+}
+.range-value {
     position: absolute;
-    /* left: 55px; */
-    top: -8px;
-    z-index: -1;
+    bottom: -20%;
 }
-.range {
-    position: relative;
-}
-.bubble {
-    height: 30px;
-    width: 65px;
-    background: white;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-    margin-top: 50px;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.pointer {
-    height: 30px;
+.range-value span {
     width: 30px;
-    background: white;
-    margin: 0 auto;
-    transform: rotate(45deg);
-    border-radius: 0 0 3px 0;
-    margin-top: -35px;
-    position: relative;
-    /* left: -2px; */
-    z-index: -1;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #ffffff;
+    color: rgb(32, 32, 32);
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 6px;
+}
+.range-value span:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #ffffff;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -1px;
 }
