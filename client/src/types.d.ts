@@ -16,11 +16,6 @@ export interface IProductToOrder {
     price: number
 }
 
-// export interface ICart {
-//     id: string
-//     products: IProductToOrder[]
-// }
-
 export type IParamsId = {
     id: string
 }

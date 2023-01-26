@@ -11,10 +11,13 @@ const CardDetailed = () => {
     const { cart, addToCart } = useContext(
         ProductsContext
     ) as ProductsContextType
+
     const { id } = useParams<IParamsId>()
+
     const product: IProduct | undefined = products.find(
         (product) => product.id === id
     )
+
     const [quantityToOrder, setQuantityToOrder] = useState<number>(1)
     const [styleLeftForSliderLabel, setStyleLeftForSliderLabel] = useState<any>(
         { left: '3%' }
@@ -28,7 +31,8 @@ const CardDetailed = () => {
         if (existingQuantityInCart !== undefined) {
             setQuantityInCart(existingQuantityInCart)
         }
-    }, [cart])
+    }, [cart, product?.id])
+
     const handleInputQuantityChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {

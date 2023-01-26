@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState, createContext } from 'react'
 import axios from 'axios'
 import { ProductsContextType, IProduct, IProductToOrder } from '../types'

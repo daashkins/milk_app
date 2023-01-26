@@ -9,6 +9,7 @@ import BackButton from './BackButton'
 
 const Main = () => {
     const productsTypes = [
+        'All',
         'Whole milk',
         'Rice milk',
         'Coconut milk',
