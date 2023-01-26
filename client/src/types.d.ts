@@ -1,3 +1,5 @@
+import { ThemeCssVarOverrides } from "@mui/material"
+
 export interface IProduct {
     id: string
     name: string
@@ -14,16 +16,19 @@ export interface IProductToOrder {
     price: number
 }
 
-export interface ICart {
-    id: string
-    products: IProductToOrder[]
-}
+// export interface ICart {
+//     id: string
+//     products: IProductToOrder[]
+// }
 
 export type IParamsId = {
     id: string
 }
 export type ProductsContextType = {
     products: IProduct[]
-    cart: ICart
-    productsInCart: IProductToOrder[]
+    cart: IProductToOrder[]
+    addToCart: (product: IProduct, quantity: number) => void
+    updateCart: (product: IProduct, quantity: number) => ThemeCssVarOverrides
+    removeFromCart: (product: IProductToOrder) => void
+    // updateCart: (products: IProduct[]) => void
 }

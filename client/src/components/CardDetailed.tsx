@@ -2,29 +2,39 @@ import * as React from 'react'
 import Image from '../images/milk.png'
 import { useContext, useState } from 'react'
 import { ProductsContext } from '../context/productsContext'
-import { ProductsContextType, IParamsId } from '../types'
+import { ProductsContextType, IParamsId, IProduct } from '../types'
 import { useParams } from 'react-router-dom'
 
 const CardDetailed = () => {
     const { products } = useContext(ProductsContext) as ProductsContextType
+    const { cart, addToCart } = useContext(ProductsContext) as ProductsContextType
     const { id } = useParams<IParamsId>()
-    const product = products.find((product) => product.id === id)
+    const product: IProduct | undefined = products.find(
+        (product) => product.id === id
+    )
     const [quantityToOrder, setQuantityToOrder] = useState<number>(50)
     const [styleLeftForSliderLabel, setStyleLeftForSliderLabel] = useState<any>(
-        { left: '25%' }
+        { left: '50%' }
     )
     const handleInputQuantityChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         setQuantityToOrder(Number(event.target.value))
-        let newLeft: number =
-            ((Number(event.target.value) - 1) * 100) / (200 - 1)
-        let newPosition: number = 10 - newLeft * 0.2
-        setStyleLeftForSliderLabel({
-            left: `calc(${newLeft}% + (${newPosition}px))`,
-        })
+        let newLeft: number
+        if (product) {
+            newLeft =
+                ((Number(event.target.value) - 1) * 100) / (product.storage - 1)
+            let newPosition: number = 10 - newLeft * 0.2
+            setStyleLeftForSliderLabel({
+                left: `calc(${newLeft}% + (${newPosition}px))`,
+            })
+        }
     }
-
+    const handleOrder = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        product && addToCart(product, quantityToOrder)
+    }
+console.log(cart);
     return (
         <div className="w-full flex justify-center">
             <div className="flex flex-col md:flex-row rounded-lg bg-transparent shadow-lg">
@@ -52,7 +62,7 @@ const CardDetailed = () => {
                             type="range"
                             defaultValue="50"
                             min="1"
-                            max="200"
+                            max={product?.storage}
                             step="1"
                             className="w-full h-1 mb-6 bg-white rounded-lg appearance cursor-pointer range-sm accent-lime-500"
                             onChange={handleInputQuantityChange}
@@ -65,7 +75,10 @@ const CardDetailed = () => {
                             <span>{quantityToOrder}</span>
                         </div>
                     </div>
-                    <button className="bg-gray-300 w-36 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded inline-flex items-center mt-14 justify-center">
+                    <button
+                        className="bg-gray-300 w-36 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded inline-flex items-center mt-14 justify-center"
+                        onClick={handleOrder}
+                    >
                         <span>Order</span>
                     </button>
                 </div>
