@@ -9,7 +9,6 @@ import BackButton from './BackButton'
 
 const Main = () => {
     const productsTypes = [
-        'All',
         'Whole milk',
         'Rice milk',
         'Coconut milk',
@@ -26,7 +25,7 @@ const Main = () => {
     const { products } = useContext(ProductsContext) as ProductsContextType
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [productsPerPage] = useState<number>(9)
-    const [filter, setFilter] = useState<string>('all')
+    const [filter, setFilter] = useState<string>('All')
     const [search, setSearch] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
 
@@ -37,7 +36,7 @@ const Main = () => {
     let totalProductsToShow: number = products.length
 
     const getCurrentProducts = () => {
-        if (filter !== 'all') {
+        if (filter !== 'All') {
             const filteredProducts = products.filter(
                 (product) => product.type === filter
             )
@@ -150,7 +149,7 @@ const Main = () => {
             </div>
             {totalProductsToShow === 0 && <BackButton />}
             <div
-                className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+                className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
                 key={`${Math.random() * 10}`}
             >
                 {currentProducts.map((product) => {

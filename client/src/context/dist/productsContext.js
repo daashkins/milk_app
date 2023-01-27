@@ -45,7 +45,6 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 exports.__esModule = true;
 exports.ProductsContext = void 0;
 var React = require("react");
-// import { v4 as uuidv4 } from 'uuid'
 var react_1 = require("react");
 var axios_1 = require("axios");
 var react_router_dom_1 = require("react-router-dom");
@@ -95,7 +94,6 @@ var ProductsProvider = function (_a) {
     var submitCart = function (cart) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             try {
-                // await axios.post(`http://localhost:8080/api/cart`, {...cart})
                 setTimeout(function () { return navigate('/'); }, 1000);
             }
             catch (err) {

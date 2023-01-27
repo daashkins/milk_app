@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState, createContext } from 'react'
 import axios from 'axios'
 import { ProductsContextType, IProduct, IProductToOrder } from '../types'
@@ -56,7 +55,6 @@ const ProductsProvider = ({ children }: any) => {
 
     const submitCart = async (cart: IProductToOrder[]) => {
         try {
-            // await axios.post(`http://localhost:8080/api/cart`, {...cart})
             setTimeout(() => navigate('/'), 1000);
         } catch (err) {
             console.error(err)

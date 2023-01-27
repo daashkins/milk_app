@@ -1,5 +1,3 @@
-import { IProductToOrder, IProductInDb } from "@src/types";
-
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -27,15 +25,15 @@ const getProducts = async () => {
     }
   }
 
-  const postCart = async (id: string) => {
-    try{
-     const response = await pool.query(`INSERT INTO carts VALUES (${id}) `)
-     console.log(response.rows);
-      return response.rows;
-    }catch(error: any) {
-      console.log(error)
-    }
-  }
+  // const postCart = async (id: string) => {
+  //   try{
+  //    const response = await pool.query(`INSERT INTO carts VALUES (${id}) `)
+  //    console.log(response.rows);
+  //     return response.rows;
+  //   }catch(error: any) {
+  //     console.log(error)
+  //   }
+  // }
 
   // const postProductsInCart = (cart: any, cartId: string) => {
   //   console.log(cart, "db");
@@ -49,4 +47,4 @@ const getProducts = async () => {
   //   // }
   // }
 
-export  { getProducts, getProduct, postCart }
+export  { getProducts, getProduct }

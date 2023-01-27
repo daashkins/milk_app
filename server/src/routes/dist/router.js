@@ -45,17 +45,6 @@ var allowedOrigins = ['http://localhost:3000'];
 var options = {
     origin: allowedOrigins
 };
-//   router.use(cors({
-//     origin: "*",
-//     methods: 'GET','POST','DELETE','UPDATE','PUT','PATCH'
-// }));
-// const corsConf = {
-//   origin: "*",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204
-// }
-// router.use(cors(corsConf));
 exports.router.use(express.json());
 exports.router.use(cors_1["default"](options));
 exports.router.get('/products', function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {

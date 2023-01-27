@@ -1,29 +1,15 @@
 import express = require('express');
 import { Request, Response } from 'express';
 import cors from 'cors';
-import {getProducts, getProduct, postCart} from '../database/queries'
-import { v4 as uuidv4 } from 'uuid';
+import {getProducts, getProduct } from '../database/queries'
 
-export const router= express.Router();
+export const router = express.Router();
 const allowedOrigins = ['http://localhost:3000'];
 
 const options: cors.CorsOptions = {
     origin: allowedOrigins
   };
 
-//   router.use(cors({
-//     origin: "*",
-//     methods: 'GET','POST','DELETE','UPDATE','PUT','PATCH'
-// }));
-
-  // const corsConf = {
-  //   origin: "*",
-  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   preflightContinue: false,
-  //   optionsSuccessStatus: 204
-  // }
-  
-  // router.use(cors(corsConf));
   router.use(express.json());
   router.use(cors(options));
 

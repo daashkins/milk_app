@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.postCart = exports.getProduct = exports.getProducts = void 0;
+exports.getProduct = exports.getProducts = void 0;
 var Pool = require('pg').Pool;
 var pool = new Pool({
     user: 'postgres',
@@ -83,23 +83,3 @@ var getProduct = function (id) { return __awaiter(void 0, void 0, void 0, functi
     });
 }); };
 exports.getProduct = getProduct;
-var postCart = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, pool.query("INSERT INTO carts VALUES (" + id + ") ")];
-            case 1:
-                response = _a.sent();
-                console.log(response.rows);
-                return [2 /*return*/, response.rows];
-            case 2:
-                error_3 = _a.sent();
-                console.log(error_3);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.postCart = postCart;
