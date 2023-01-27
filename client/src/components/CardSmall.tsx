@@ -23,7 +23,7 @@ const CardSmall: React.FC<Props> = ({ product }) => {
                     {product.name}
                 </p>
                 <p className="text-normal font-black leading-none text-gray-800 pr-6">
-                    {product.quantity} liters
+                    {product.quantity} L
                 </p>
             </div>
             <p className="text-xs leading-3 text-gray-600 pt-2">

@@ -3,6 +3,7 @@ import * as React from 'react'
 import { useEffect, useState, createContext } from 'react'
 import axios from 'axios'
 import { ProductsContextType, IProduct, IProductToOrder } from '../types'
+import { useNavigate } from 'react-router-dom'
 
 export const ProductsContext = createContext<ProductsContextType | null>(null)
 
@@ -10,8 +11,10 @@ const ProductsProvider = ({ children }: any) => {
     const [products, setProducts] = useState<IProduct[]>([])
     const [cart, setCart] = useState<IProductToOrder[]>([])
 
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        axios.get('http://localhost:8000/api/products').then((response) => {
+        axios.get('http://localhost:8080/api/products').then((response) => {
             setProducts([...response.data])
         })
     }, [])
@@ -51,10 +54,21 @@ const ProductsProvider = ({ children }: any) => {
         }
     }
 
-    console.log(cart)
+    const submitCart = async (cart: IProductToOrder[]) => {
+        try {
+            // await axios.post(`http://localhost:8080/api/cart`, {...cart})
+            setTimeout(() => navigate('/'), 1000);
+        } catch (err) {
+            console.error(err)
+            setTimeout(() => navigate('/'), 1000);
+        }
+        window.localStorage.setItem('cart', '[]')
+    }
+
+
 
     return (
-        <ProductsContext.Provider value={{ products, cart, addToCart }}>
+        <ProductsContext.Provider value={{ products, cart, addToCart, submitCart }}>
             {children}
         </ProductsContext.Provider>
     )

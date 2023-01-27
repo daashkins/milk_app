@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProduct = exports.getProducts = void 0;
+exports.postCart = exports.getProduct = exports.getProducts = void 0;
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: 'postgres',
@@ -38,3 +38,14 @@ const getProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getProduct = getProduct;
+const postCart = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield pool.query(`INSERT INTO carts VALUES (${id}) `);
+        console.log(response.rows);
+        return response.rows;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.postCart = postCart;

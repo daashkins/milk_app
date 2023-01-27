@@ -3,11 +3,19 @@ import { ProductsContext } from '../context/productsContext'
 import { ProductsContextType } from '../types'
 import BackButton from './BackButton'
 import CardSmall from './CardSmall'
+
 const Cart = () => {
     const { cart } = useContext(
         ProductsContext
     ) as ProductsContextType
 
+    const { submitCart } = useContext(
+        ProductsContext
+    ) as ProductsContextType
+
+    const handleBuy = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        await submitCart(cart)
+    }
     const subTotal = (cart.reduce( ( sum, { price, quantity } ) => sum + price * quantity , 0).toFixed(2))
     const total = (Number(subTotal) + 3.65).toFixed(2)
     return (
@@ -51,8 +59,6 @@ const Cart = () => {
                                         $3.65
                                     </p>
                                 </div>
-                            </div>
-                            <div>
                                 <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                                     <p className="text-2xl leading-normal text-gray-800">
                                         Total
@@ -60,6 +66,13 @@ const Cart = () => {
                                     <p className="text-2xl font-bold leading-normal text-right text-gray-800">
                                         ${total}
                                     </p>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex items-center pb-6 justify-center lg:pt-5 pt-20">
+                                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded w-36" onClick={handleBuy}>
+                                        <span >Buy</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
